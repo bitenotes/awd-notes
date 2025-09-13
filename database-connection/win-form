@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+
+using System.Data.SqlClient;
+namespace databaseproject
+{
+    public partial class frmdbstudent : System.Web.UI.Page
+    {
+        public SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=D:\asset mgmnt sys\databaseproject\databaseproject\App_Data\college.mdf;Integrated Security=True;User Instance=True"); 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            string q = "insert into student(rollno,sname,address) values('" + this.TextBox1.Text + "', '" + this.TextBox2.Text + "','" + this.TextBox3.Text + "')";
+            SqlCommand cmd = new SqlCommand(q, con);
+            cmd.ExecuteNonQuery();
+           Label1.Text="DATA HAS BEEN SAVED..!!";
+            con.Close();
+        }
+    }
+}
